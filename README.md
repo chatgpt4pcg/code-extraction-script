@@ -14,3 +14,35 @@ To use this script, you must have <a href="https://nodejs.org/en/" target="_new"
 
 1. Run the script using the command `npm start -s="<SOURCE_FOLDER>"`. For example, `npm start -s="./test_raw"`.
 2. The script will output the extracted text for each file as a text file in the `intermediate/<TARGET_CHARACTER>/<TRIAL_NUMBER>/` folder, which has the same structure as the source folder. The file `_log_<DATE_TIME>.txt` will be created in the same folder.
+
+Please ensure that the source folder has the following structure:
+
+```
+<SOURCE_FOLDER>
+├── <TARGET_CHARACTER>
+│   ├── <TRIAL_NUMBER>
+│   │   ├── <FILE_NAME>.txt
+│   │   ├── <FILE_NAME>.txt
+│   │   └── <FILE_NAME>.txt
+│   ├── <TRIAL_NUMBER>
+│   │   ├── <FILE_NAME>.txt
+│   │   ├── <FILE_NAME>.txt
+│   │   └── <FILE_NAME>.txt
+│   └── <TRIAL_NUMBER>
+│       ├── <FILE_NAME>.txt
+│       ├── <FILE_NAME>.txt
+│       └── <FILE_NAME>.txt
+└── <TARGET_CHARACTER>
+    ├── <TRIAL_NUMBER>
+    │   ├── <FILE_NAME>.txt
+    │   ├── <FILE_NAME>.txt
+    │   └── <FILE_NAME>.txt
+    ├── <TRIAL_NUMBER>
+    │   ├── <FILE_NAME>.txt
+    │   ├── <FILE_NAME>.txt
+    │   └── <FILE_NAME>.txt
+    └── <TRIAL_NUMBER>
+        ├── <FILE_NAME>.txt
+        ├── <FILE_NAME>.txt
+        └── <FILE_NAME>.txt
+```
