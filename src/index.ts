@@ -35,7 +35,7 @@ async function processFolder(sourceFolder: string) {
 async function extractCode(filePath: string, file: string) {
   const outputPath = filePath.replace(file, '').split('/').slice(2).join('/');
 
-  if (file.indexOf('.txt') === -1) {
+  if (file.indexOf('.txt') === -1 && file.indexOf('.md') === -1) {
     return
   }
 
@@ -64,7 +64,7 @@ async function extractCode(filePath: string, file: string) {
 
   await fs.promises.appendFile(path.posix.join(outputFolder, finalOutputFolder, `_log_${dateTimeString}.txt`), logMessage + '\n')
   if (isSuccess) {
-    await fs.promises.writeFile(path.posix.join(outputFolder, finalOutputFolder, file), extractedCode.trim())
+    await fs.promises.writeFile(path.posix.join(outputFolder, finalOutputFolder, file.split('.').slice(0, -1).join('.') + '.txt'), extractedCode.trim())
   }
 }
 
