@@ -1,7 +1,8 @@
 import fs from 'fs'
 import parseArgs from 'minimist'
+import path from 'path'
 
-const outputFolder = './intermediate/';
+const outputFolder = path.posix.resolve('./intermediate/');
 const dateTimeString = new Date().toISOString()
 
 async function main() {
@@ -11,38 +12,45 @@ async function main() {
   }
 
   const sourceFolder = args['s'] + '/'
-  processFolder(sourceFolder)
+  const sFolder = path.posix.resolve(sourceFolder)
+  processFolder(sFolder)
 }
 
 async function processFolder(sourceFolder: string) {
   const files = await fs.promises.readdir(sourceFolder);
   for (const file of files) {
-    const stats = await fs.promises.stat(sourceFolder + file)
+    const fPath = path.posix.join(sourceFolder, file)
+    const stats = await fs.promises.stat(fPath)
 
     if (stats.isDirectory()) {
-      processFolder(sourceFolder + file + '/')
+      const nextFolder = path.posix.join(sourceFolder, file)
+      processFolder(nextFolder)
     } else {
-      extractCode(sourceFolder, file)
+      extractCode(fPath, file)
     }
   }
 }
 
 async function extractCode(filePath: string, file: string) {
-  const outputPath = filePath.split('/').slice(2).join('/');
+  const outputPath = filePath.replace(file, '').split('/').slice(2).join('/');
+
+  if (file.indexOf('.txt') === -1) {
+    return
+  }
 
   if (!fs.existsSync(outputFolder)) {
     fs.mkdirSync(outputFolder);
   }
 
-  outputPath.split('/').slice(0, -1).reduce((acc, curr) => {
-    const folder = acc + curr + '/'
+  outputPath.split('/').slice(-3, -1).reduce((acc, curr) => {
+    const folder = path.posix.join(acc, curr)
     if (!fs.existsSync(folder)) {
       fs.mkdirSync(folder);
     }
     return folder
   }, outputFolder)
 
-  const raw = await fs.promises.readFile(filePath + file)
+  const raw = await fs.promises.readFile(filePath)
   const text = raw.toString('utf-8')
 
   const extractedCode = extractString(text)
@@ -51,11 +59,11 @@ async function extractCode(filePath: string, file: string) {
 
   console.log(logMessage)
 
-  const finalOutputFolder = outputFolder + outputPath
+  const finalOutputFolder = outputPath.split('/').slice(-3, -1).join('/')
 
-  await fs.promises.appendFile(finalOutputFolder + `_log_${dateTimeString}.txt`, logMessage + '\n')
+  await fs.promises.appendFile(path.posix.join(outputFolder, finalOutputFolder, `_log_${dateTimeString}.txt`), logMessage + '\n')
   if (isSuccess) {
-    await fs.promises.writeFile(finalOutputFolder + file, extractedCode.trim())
+    await fs.promises.writeFile(path.posix.join(outputFolder, finalOutputFolder, file), extractedCode.trim())
   }
 }
 
