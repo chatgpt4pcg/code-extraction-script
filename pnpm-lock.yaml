@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@types/minimist': ^1.2.2
   '@types/node': ^18.15.3
-  chatgpt4pcg: ^1.0.0
+  chatgpt4pcg: ^1.1.0
   eslint: ^8.36.0
   minimist: ^1.2.8
   nodemon: ^2.0.21
@@ -12,7 +12,7 @@ specifiers:
   typescript: ^5.0.2
 
 dependencies:
-  chatgpt4pcg: 1.0.0_eslint@8.36.0
+  chatgpt4pcg: 1.1.0_eslint@8.36.0
   minimist: 1.2.8
   typescript: 5.0.2
 
@@ -401,8 +401,8 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
 
-  /chatgpt4pcg/1.0.0_eslint@8.36.0:
-    resolution: {integrity: sha512-5O3JgI9uluNWHudmTEPC1miDZPvUf072wD1zh4EC4TPf/Zb4jLsg6slAWuY4Ozh1m1jbV7xpNk/ciySHj/d4lg==}
+  /chatgpt4pcg/1.1.0_eslint@8.36.0:
+    resolution: {integrity: sha512-aZip/K7piH6HgLbvf6BaqVlK9du0guVHfjuiJKtXorJZW+Fs9MKAmZHplNjhBMBfCkgxS7oPYasfItNbmD22RQ==}
     dependencies:
       bignumber.js: 9.1.1
       tesseract.js: 4.0.2_eslint@8.36.0
