@@ -1,3 +1,6 @@
+import { directoryWalk, replicateFolderStructure } from './file-utils';
+
+import { extractCode } from 'chatgpt4pcg'
 import fs from 'fs'
 import parseArgs from 'minimist'
 import path from 'path'
@@ -14,47 +17,22 @@ async function main() {
 
   const sourceFolder = argv + '/'
   const sFolder = path.posix.resolve(sourceFolder)
-  processFolder(sFolder)
+  await directoryWalk(sFolder, processFile)
 }
 
-async function processFolder(sourceFolder: string) {
-  const files = await fs.promises.readdir(sourceFolder);
-  for (const file of files) {
-    const fPath = path.posix.join(sourceFolder, file)
-    const stats = await fs.promises.stat(fPath)
-
-    if (stats.isDirectory()) {
-      const nextFolder = path.posix.join(sourceFolder, file)
-      processFolder(nextFolder)
-    } else {
-      extractCode(fPath, file)
-    }
-  }
-}
-
-async function extractCode(filePath: string, file: string) {
+async function processFile(filePath: string, file: string) {
   const outputPath = filePath.replace(file, '').split('/').slice(2).join('/');
 
   if (file.indexOf('.txt') === -1 && file.indexOf('.md') === -1) {
     return
   }
 
-  if (!fs.existsSync(outputFolder)) {
-    fs.mkdirSync(outputFolder);
-  }
-
-  outputPath.split('/').slice(-3, -1).reduce((acc, curr) => {
-    const folder = path.posix.join(acc, curr)
-    if (!fs.existsSync(folder)) {
-      fs.mkdirSync(folder);
-    }
-    return folder
-  }, outputFolder)
+  await replicateFolderStructure(outputPath, outputFolder)
 
   const raw = await fs.promises.readFile(filePath)
   const text = raw.toString('utf-8')
 
-  const extractedCode = extractString(text)
+  const extractedCode = extractCode(text)
   const isSuccess = extractedCode !== null
   const logMessage = `${new Date()} - ${file} - ${isSuccess ? 'Success' : 'Failed'}`
 
@@ -66,33 +44,6 @@ async function extractCode(filePath: string, file: string) {
   if (isSuccess) {
     await fs.promises.writeFile(path.posix.join(outputFolder, finalOutputFolder, file.split('.').slice(0, -1).join('.') + '.txt'), extractedCode.trim())
   }
-}
-
-function extractString(text: string): string | null {
-  const PATTERN = /```([^`]+)```/g;
-  const CODE_PATTERN = /ab\_drop\(['|"]b[1|3][1|3]['|"], *\d*\)/g;
-
-  let match;
-  let lastMatch = null;
-  while ((match = PATTERN.exec(text)) !== null) {
-    lastMatch = match;
-  }
-  if (!lastMatch) {
-    return null
-  }
-  const code = lastMatch[0]
-  const functionCode = code.matchAll(CODE_PATTERN)
-
-  let output = ''
-  for (const fn of functionCode) {
-    output += fn.toString().replaceAll('"', "'") + '\n'
-  }
-
-  if (output.length === 0) {
-    return null
-  }
-
-  return output;
 }
 
 main()
