@@ -17,11 +17,10 @@ export async function directoryWalk(sourceFolder: string, callback: (path: strin
 }
 
 export async function replicateFolderStructure(filePath: string, targetFolder: string) {
-  const outputFolder = path.posix.resolve('./similarity/');
   const outputPath = filePath.replace(targetFolder, '').split('/').slice(2).join('/');
   
-  if (!fs.existsSync(outputFolder)) {
-    fs.mkdirSync(outputFolder);
+  if (!fs.existsSync(targetFolder)) {
+    fs.mkdirSync(targetFolder);
   }
 
   outputPath.split('/').slice(-3, -1).reduce((acc, curr) => {
@@ -30,5 +29,5 @@ export async function replicateFolderStructure(filePath: string, targetFolder: s
       fs.mkdirSync(folder);
     }
     return folder
-  }, outputFolder)
+  }, targetFolder)
 }
