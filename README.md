@@ -12,37 +12,33 @@ To use this script, you must have <a href="https://nodejs.org/en/" target="_new"
 
 ## Usage
 
-1. Run the script using the command `npm start -s="<SOURCE_FOLDER>"`. For example, `npm start -s="./test_raw"`.
-2. The script will output the extracted text for each file as a text file in the `intermediate/<TARGET_CHARACTER>/<TRIAL_NUMBER>/` folder, which has the same structure as the source folder. The file `_log_<DATE_TIME>.txt` will be created in the same folder.
+1. Run the script using the command `npm start -s="<SOURCE_FOLDER>"`. For example, `npm start -s="./competition"`.
+2. The script will output the extracted code for each file as a text file in the `<SOURCE_FOLDER>/<TEAM_NAME>/intermediate/<TARGET_CHARACTER>` folder, which has the same structure as the source folder. The file `code_log_<DATE_TIME>.txt` will be created in the `<SOURCE_FOLDER>/logs` folder.
 
-Please ensure that the source folder has the following structure:
+Please ensure that the source folder is in the same folder as the script and has the following structure:
 
 ```
 <SOURCE_FOLDER>
-├── <TARGET_CHARACTER>
-│   ├── <TRIAL_NUMBER>
-│   │   ├── <FILE_NAME>.txt
-│   │   ├── <FILE_NAME>.txt
-│   │   └── <FILE_NAME>.txt
-│   ├── <TRIAL_NUMBER>
-│   │   ├── <FILE_NAME>.txt
-│   │   ├── <FILE_NAME>.txt
-│   │   └── <FILE_NAME>.txt
-│   └── <TRIAL_NUMBER>
-│       ├── <FILE_NAME>.txt
-│       ├── <FILE_NAME>.txt
-│       └── <FILE_NAME>.txt
-└── <TARGET_CHARACTER>
-    ├── <TRIAL_NUMBER>
-    │   ├── <FILE_NAME>.txt
-    │   ├── <FILE_NAME>.txt
-    │   └── <FILE_NAME>.txt
-    ├── <TRIAL_NUMBER>
-    │   ├── <FILE_NAME>.txt
-    │   ├── <FILE_NAME>.txt
-    │   └── <FILE_NAME>.txt
-    └── <TRIAL_NUMBER>
-        ├── <FILE_NAME>.txt
-        ├── <FILE_NAME>.txt
-        └── <FILE_NAME>.txt
+├── <TEAM_NAME>
+|   ├── <STAGE>
+│   │    └── <CHARACTER>
+│   │       ├── <TRIAL_NUMBER>.jpg
+│   │       ├── <TRIAL_NUMBER>.png
+│   │       └── <TRIAL_NUMBER>.jpg
+│   └── <STAGE>
+│        └── <CHARACTER>
+│           ├── <TRIAL_NUMBER>.png
+│           ├── <TRIAL_NUMBER>.png
+│           └── <TRIAL_NUMBER>.png
+└── <TEAM_NAME>
+    ├── <STAGE>
+    │    └── <CHARACTER>
+    │       ├── <TRIAL_NUMBER>.jpg
+    │       ├── <TRIAL_NUMBER>.png
+    │       └── <TRIAL_NUMBER>.jpg
+    └── <STAGE>
+         └── <CHARACTER>
+            ├── <TRIAL_NUMBER>.png
+            ├── <TRIAL_NUMBER>.png
+            └── <TRIAL_NUMBER>.png
 ```
