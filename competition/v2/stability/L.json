@@ -1,0 +1,46 @@
+{
+    "dataCount": 10,
+    "rate": 0.9600000381469727,
+    "raws": [
+        {
+            "tag": "competition\\v2\\levels\\L\\V2_L_1.xml",
+            "score": 1.0
+        },
+        {
+            "tag": "competition\\v2\\levels\\L\\V2_L_10.xml",
+            "score": 1.0
+        },
+        {
+            "tag": "competition\\v2\\levels\\L\\V2_L_2.xml",
+            "score": 1.0
+        },
+        {
+            "tag": "competition\\v2\\levels\\L\\V2_L_3.xml",
+            "score": 1.0
+        },
+        {
+            "tag": "competition\\v2\\levels\\L\\V2_L_4.xml",
+            "score": 1.0
+        },
+        {
+            "tag": "competition\\v2\\levels\\L\\V2_L_5.xml",
+            "score": 1.0
+        },
+        {
+            "tag": "competition\\v2\\levels\\L\\V2_L_6.xml",
+            "score": 0.6000000238418579
+        },
+        {
+            "tag": "competition\\v2\\levels\\L\\V2_L_7.xml",
+            "score": 1.0
+        },
+        {
+            "tag": "competition\\v2\\levels\\L\\V2_L_8.xml",
+            "score": 1.0
+        },
+        {
+            "tag": "competition\\v2\\levels\\L\\V2_L_9.xml",
+            "score": 1.0
+        }
+    ]
+}
