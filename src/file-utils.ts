@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
+const RESULT_FOLDER_NAME = 'result'
 const LOG_FOLDER_NAME = 'logs'
 const START_TIME = new Date().toISOString().replace(":", "_")
 
@@ -10,7 +11,7 @@ export async function listAllDirs(sourceFolder: string) {
   for (const file of files) {
     const fPath = path.posix.join(sourceFolder, file)
     const fileState = await fs.promises.stat(fPath)
-    if (fileState.isDirectory() && !file.startsWith('.') && file !== LOG_FOLDER_NAME) {
+    if (fileState.isDirectory() && !file.startsWith('.') && file !== LOG_FOLDER_NAME && file !== RESULT_FOLDER_NAME) {
       directories.push(file)
     }
   }
