@@ -76,11 +76,10 @@ async function processTrialFile(team: string, character: string, trial: string, 
   await appendLog(logFolderPath, CURRENT_STAGE, trialLog);
 
   const trialFilePath = path.posix.join(characterFolderPath, trial);
-  const intermediateFileContent = await fs.promises.readFile(trialFilePath);
-  const rawResult = intermediateFileContent.toString('utf-8');
+  const rawFileContent = await fs.promises.readFile(trialFilePath, 'utf-8');
 
   try {
-    const codeResult = extractCode(rawResult);
+    const codeResult = extractCode(rawFileContent);
 
     if (codeResult === null) {
       throw Error('Code not found.');
