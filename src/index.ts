@@ -24,13 +24,13 @@ async function main() {
   const teamFolders = await listAllDirs(sourceFolder)
 
   if (teamFolders.length === 0) {
-    const log = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - No team folders found.`
+    const log = `[${new Date().toISOString()}] Processing - No team folders found.`
     await appendLog(logFolderPath, CURRENT_STAGE, log)
     return
   }
 
   teamFolders.forEach(async (team) => {
-    const teamLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${team}`
+    const teamLog = `[${new Date().toISOString()}] Processing - team: ${team}`
     await appendLog(logFolderPath, CURRENT_STAGE, teamLog)
 
     const teamFolderPath = path.posix.join(sourceFolder, team)
@@ -39,7 +39,7 @@ async function main() {
     try {
       characters = await listCharactersDirs(teamFolderPath, INPUT_STAGE)
     } catch (e) {
-      const teamLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${team} - Failed`
+      const teamLog = `[${new Date().toISOString()}] Processing - team: ${team} - Failed`
       if (e instanceof Error) {
         await appendLog(logFolderPath, CURRENT_STAGE, `${teamLog} - ${e.message.toString()}`)
       } else if (typeof e === 'string') {
@@ -52,14 +52,14 @@ async function main() {
     }
 
     characters.forEach(async (character) => {
-      const characterLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${team} - character: ${character}`
+      const characterLog = `[${new Date().toISOString()}] Processing - team: ${team} - character: ${character}`
       await appendLog(logFolderPath, CURRENT_STAGE, characterLog)
 
       const characterFolderPath = path.posix.join(teamFolderPath, INPUT_STAGE, character)
       const trials = await listAllFiles(characterFolderPath)
 
       if (trials.length === 0) {
-        const trialLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${team} - Failed`
+        const trialLog = `[${new Date().toISOString()}] Processing - team: ${team} - Failed`
         await appendLog(logFolderPath, CURRENT_STAGE, `${trialLog} - No trials found.`)
         return
       }
@@ -72,7 +72,7 @@ async function main() {
 }
 
 async function processTrialFile(team: string, character: string, trial: string, logFolderPath: string, characterFolderPath: string) {
-  const trialLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${team} - character: ${character} - trial: ${trial}`;
+  const trialLog = `[${new Date().toISOString()}] Processing - team: ${team} - character: ${character} - trial: ${trial}`;
   await appendLog(logFolderPath, CURRENT_STAGE, trialLog);
 
   const trialFilePath = path.posix.join(characterFolderPath, trial);
@@ -91,10 +91,10 @@ async function processTrialFile(team: string, character: string, trial: string, 
     const outputFile = path.posix.join(outputPath, `${finalFileName}.txt`);
     await fs.promises.writeFile(outputFile, codeResult);
 
-    const fileLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${team} - character: ${character} - trial: ${trial} - Succeed`;
+    const fileLog = `[${new Date().toISOString()}] Processing - team: ${team} - character: ${character} - trial: ${trial} - Succeed`;
     await appendLog(logFolderPath, CURRENT_STAGE, fileLog);
   } catch (e) {
-    const fileLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${team} - character: ${character} - trial: ${trial} - Failed`;
+    const fileLog = `[${new Date().toISOString()}] Processing - team: ${team} - character: ${character} - trial: ${trial} - Failed`;
     if (e instanceof Error) {
       await appendLog(logFolderPath, CURRENT_STAGE, `${fileLog} - ${e.message.toString()}`);
     } else if (typeof e === 'string') {
