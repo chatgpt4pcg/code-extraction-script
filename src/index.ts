@@ -85,13 +85,19 @@ async function processTrialFile(team: string, character: string, trial: string, 
       throw Error('Code not found.');
     }
 
-    const outputPath = await createOutputFolder(characterFolderPath, CURRENT_STAGE, INPUT_STAGE);
-    const finalFileName = trial.split('.').slice(0, -1).join('.');
-    const outputFile = path.posix.join(outputPath, `${finalFileName}.txt`);
-    await fs.promises.writeFile(outputFile, codeResult);
+    let outputPath = ''
+    try {
+      outputPath = await createOutputFolder(characterFolderPath, CURRENT_STAGE, INPUT_STAGE);
 
-    const fileLog = `[${new Date().toISOString()}] Processing - team: ${team} - character: ${character} - trial: ${trial} - Succeed`;
-    await appendLog(logFolderPath, CURRENT_STAGE, fileLog);
+      const finalFileName = trial.split('.').slice(0, -1).join('.');
+      const outputFile = path.posix.join(outputPath, `${finalFileName}.txt`);
+      await fs.promises.writeFile(outputFile, codeResult);
+
+      const fileLog = `[${new Date().toISOString()}] Processing - team: ${team} - character: ${character} - trial: ${trial} - Succeed`;
+      await appendLog(logFolderPath, CURRENT_STAGE, fileLog);
+    } catch (e) {
+      await processTrialFile(team, character, trial, logFolderPath, characterFolderPath)
+    }
   } catch (e) {
     const fileLog = `[${new Date().toISOString()}] Processing - team: ${team} - character: ${character} - trial: ${trial} - Failed`;
     if (e instanceof Error) {
