@@ -85,9 +85,8 @@ async function processTrialFile(team: string, character: string, trial: string, 
       throw Error('Code not found.');
     }
 
-    let outputPath = ''
     try {
-      outputPath = await createOutputFolder(characterFolderPath, CURRENT_STAGE, INPUT_STAGE);
+      const outputPath = await createOutputFolder(characterFolderPath, CURRENT_STAGE, INPUT_STAGE);
 
       const finalFileName = trial.split('.').slice(0, -1).join('.');
       const outputFile = path.posix.join(outputPath, `${finalFileName}.txt`);
