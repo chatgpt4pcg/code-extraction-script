@@ -1,11 +1,11 @@
-import { appendLog, createLogFolder, createOutputFolder, listAllDirs, listAllFiles, listCharactersDirs, parseSourceFolderArgument } from 'chatgpt4pcg-node';
+import { STAGE, appendLog, createLogFolder, createOutputFolder, listAllDirs, listAllFiles, listCharactersDirs, parseSourceFolderArgument } from 'chatgpt4pcg-node';
 
 import { extractCode } from 'chatgpt4pcg';
 import fs from 'fs'
 import path from 'path'
 
-const INPUT_STAGE = 'raw'
-const CURRENT_STAGE = 'intermediate'
+const INPUT_STAGE: STAGE = 'raw'
+const CURRENT_STAGE: STAGE = 'intermediate'
 const FUNCTION_PREFIX = 'ab_drop' // Change this if needed
 
 async function main() {
