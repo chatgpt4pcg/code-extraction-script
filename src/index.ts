@@ -6,6 +6,7 @@ import path from 'path'
 
 const INPUT_STAGE = 'raw'
 const CURRENT_STAGE = 'intermediate'
+const FUNCTION_PREFIX = 'ab_drop' // Change this if needed
 
 async function main() {
   let sourceFolder = ''
@@ -79,7 +80,7 @@ async function processTrialFile(team: string, character: string, trial: string, 
   const rawFileContent = await fs.promises.readFile(trialFilePath, 'utf-8');
 
   try {
-    const codeResult = extractCode(rawFileContent);
+    const codeResult = extractCode(rawFileContent, FUNCTION_PREFIX);
 
     if (codeResult === null) {
       throw Error('Code not found.');
