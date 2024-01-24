@@ -1,6 +1,6 @@
 # Code Extraction Script
 
-This repository contains a script for extracting a series of `ab_drop()` from a text file.
+This repository contains a script for extracting a series of `drop_block()` from a text file.
 
 ## Installation
 
