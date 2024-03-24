@@ -13,7 +13,7 @@ To use this script, you must have <a href="https://nodejs.org/en/" target="_new"
 ## Usage
 
 1. Run the script using the command `npm start -s="<SOURCE_FOLDER>"`. For example, `npm start -s="./competition"`.
-2. The script will output the extracted code for each file as a text file in the `<SOURCE_FOLDER>/<TEAM_NAME>/intermediate/<CHARACTER>` folder, which has the same structure as the source folder. A file `code_log_<DATE_TIME>.txt` will be created in the `<SOURCE_FOLDER>/logs` folder.
+2. The script will output the extracted code for each file as a text file in the `<SOURCE_FOLDER>/<TEAM_NAME>/intermediate/<CHARACTER>` folder, which has the same structure as the source folder. A file `intermediate_log_<DATE_TIME>.txt` will be created in the `<SOURCE_FOLDER>/logs` folder.
 
 Please note that `<STAGE>` can be `raw`, `intermediate`, `levels`, `images`, `stability`, `similarity`, or `diversity`. `<CHARACTER>` can be `A`, `B`, `C`, ..., `Z`.
 
